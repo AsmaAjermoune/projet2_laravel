@@ -3,64 +3,46 @@
 namespace App\Http\Controllers;
 
 use App\Models\SpecialiteModel;
+use App\Models\FormationModel;
 use App\Http\Requests\StoreSpecialiteModelRequest;
 use App\Http\Requests\UpdateSpecialiteModelRequest;
-
+use Illuminate\Http\Request;
 class SpecialiteModelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $specialites = SpecialiteModel::with('formation')->get();
+        return view('specialites.index', compact('specialites'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $formations = FormationModel::all();
+        return view('specialites.create', compact('formations'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreSpecialiteModelRequest $request)
+    public function store(Request $request)
     {
-        //
+        SpecialiteModel::create($request->all());
+        return redirect()->route('specialites.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(SpecialiteModel $specialiteModel)
+    public function edit($codeSpe)
     {
-        //
+        $specialite = SpecialiteModel::findOrFail($codeSpe);
+        $formations = FormationModel::all();
+        return view('specialites.edit', compact('specialite','formations'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(SpecialiteModel $specialiteModel)
+    public function update(Request $request, $codeSpe)
     {
-        //
+        SpecialiteModel::findOrFail($codeSpe)->update($request->all());
+        return redirect()->route('specialites.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateSpecialiteModelRequest $request, SpecialiteModel $specialiteModel)
+    public function destroy($codeSpe)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(SpecialiteModel $specialiteModel)
-    {
-        //
+        SpecialiteModel::destroy($codeSpe);
+        return redirect()->route('specialites.index');
     }
 }

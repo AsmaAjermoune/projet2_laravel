@@ -4,22 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\EtudiantModel;
-class SpecialiteModel extends Model
-{
-    protected $fillable = [
-        'NumCINETU',
-        'codeForm',
-        'nomEtu',
-        'prenomEtu',
-        'adresseEtu',
-        'villeEtu',
-        'niveauEtu'
-    ];
 
+class SpecialiteModel extends Model{ 
 
-    public function formation(): BelongsTo
-    {
-        return $this->belongsTo(FormationModel::class);
+    protected $primaryKey = 'codeSpec';
+    public $incrementing = false;
+    protected $fillable = ['codeSpec','nomSpec','codeForm','descSpec'];
+
+ 
+    public function formation(){
+        return $this->belongsTo(Formation::class, 'codeForm', 'codeForm');
     }
 }

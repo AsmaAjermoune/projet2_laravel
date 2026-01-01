@@ -8,7 +8,10 @@ use App\Models\SessionModel;
 
 class FormationModel extends Model
 {
-     protected $fillable = [
+
+    protected $primaryKey = 'codeForm';
+    public $incrementing = false;
+    protected $fillable = [
         'codeForm',
         'codeSess',
         'titreForm',
@@ -17,8 +20,15 @@ class FormationModel extends Model
     ];
 
 
-    public function session(): BelongsTo
-    {
-        return $this->belongsTo(SessionModel::class);
+    public function etudiants (){
+        return $this->hasMany(EtudiantModel::class,'codeForm','codeForm');
+    }
+
+    public function specialites(){
+        return $this->hasMany(SpecialiteModel::class , 'codeForm','codeForm');
+    }
+
+    public function session(){
+        return $this->belongsTo(SessionModel::class , 'codeSess' , 'codeSess');
     }
 }

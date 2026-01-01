@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class SessionModel extends Model
 {
-    /** @use HasFactory<\Database\Factories\SessionModelFactory> */
-    use HasFactory;
+
+    protected $primaryKey = 'codeSess';
+    public $incrementing = false;
+    protected $fillable = ['codeSess','nomSess','dateDebutSess','dateFinSess'];
+
+    public function formations(){
+        return $this->hasMany(FormationModel::class , 'codeSess' , 'codeSess');
+    }
 }

@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('formation_models', function (Blueprint $table) {
             $table->integer('codeForm')->primary();
             $table->integer('codeSess');
-            $table->foreign('codeSess')->references('codeSess')->on('session_models');
+            $table->foreign('codeSess')->references('codeSess')->on('session_models')->onDelete('cascade');
             $table->String('titreForm');
-            $table->date('dureeForm');
+            $table->integer('dureeForm');
             $table->String('prixForm');
             $table->timestamps();
         });

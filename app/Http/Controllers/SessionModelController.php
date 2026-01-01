@@ -5,62 +5,41 @@ namespace App\Http\Controllers;
 use App\Models\SessionModel;
 use App\Http\Requests\StoreSessionModelRequest;
 use App\Http\Requests\UpdateSessionModelRequest;
-
+use Illuminate\Http\Request;
 class SessionModelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $sessions = SessionModel::all();
+        return view('sessions.index', compact('sessions'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('sessions.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreSessionModelRequest $request)
+    public function store(Request $request)
     {
-        //
+        SessionModel::create($request->all());
+        return redirect()->route('sessions.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(SessionModel $sessionModel)
+    public function edit($codeSess)
     {
-        //
+        $session = SessionModel::findOrFail($codeSess);
+        return view('sessions.edit', compact('session'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(SessionModel $sessionModel)
+    public function update(Request $request, $codeSess)
     {
-        //
+        SessionModel::findOrFail($codeSess)->update($request->all());
+        return redirect()->route('sessions.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateSessionModelRequest $request, SessionModel $sessionModel)
+    public function destroy($codeSess)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(SessionModel $sessionModel)
-    {
-        //
+        SessionModel::destroy($codeSess);
+        return redirect()->route('sessions.index');
     }
 }

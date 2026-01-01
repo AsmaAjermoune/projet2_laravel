@@ -3,64 +3,46 @@
 namespace App\Http\Controllers;
 
 use App\Models\EtudiantModel;
+use App\Models\FormationModel;
 use App\Http\Requests\StoreEtudiantModelRequest;
 use App\Http\Requests\UpdateEtudiantModelRequest;
-
+use Illuminate\Http\Request;
 class EtudiantModelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $etudiants = EtudiantModel::with('formation')->get();
+        return view('etudiants.index', compact('etudiants'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $formations = FormationModel::all();
+        return view('etudiants.create', compact('formations'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreEtudiantModelRequest $request)
+    public function store(Request $request)
     {
-        //
+        EtudiantModel::create($request->all());
+        return redirect()->route('etudiants.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(EtudiantModel $etudiantModel)
+    public function edit($cin)
     {
-        //
+        $etudiant = EtudiantModel::findOrFail($cin);
+        $formations = FormationModel::all();
+        return view('etudiants.edit', compact('etudiant','formations'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(EtudiantModel $etudiantModel)
+    public function update(Request $request, $cin)
     {
-        //
+        EtudiantModel::findOrFail($cin)->update($request->all());
+        return redirect()->route('etudiants.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateEtudiantModelRequest $request, EtudiantModel $etudiantModel)
+    public function destroy($cin)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(EtudiantModel $etudiantModel)
-    {
-        //
+        EtudiantModel::destroy($cin);
+        return redirect()->route('etudiants.index');
     }
 }

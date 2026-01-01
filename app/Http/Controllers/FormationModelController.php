@@ -3,64 +3,47 @@
 namespace App\Http\Controllers;
 
 use App\Models\FormationModel;
+use App\Models\SessionModel;
 use App\Http\Requests\StoreFormationModelRequest;
 use App\Http\Requests\UpdateFormationModelRequest;
-
+use Illuminate\Http\Request;
 class FormationModelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $formations = FormationModel::with('session')->get();
+        return view('formations.index', compact('formations'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $sessions = SessionModel::all();
+        return view('formations.create', compact('sessions'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreFormationModelRequest $request)
+    public function store(Request $request)
     {
-        //
+        FormationModel::create($request->all());
+        return redirect()->route('formations.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(FormationModel $formationModel)
+    public function edit($codeForm)
     {
-        //
+        $formation = FormationModel::findOrFail($codeForm);
+        $sessions = SessionModel::all();
+        return view('formations.edit', compact('formation', 'sessions'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(FormationModel $formationModel)
+    public function update(Request $request, $codeForm)
     {
-        //
+        $formation = FormationModel::findOrFail($codeForm);
+        $formation->update($request->all());
+        return redirect()->route('formations.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateFormationModelRequest $request, FormationModel $formationModel)
+    public function destroy($codeForm)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(FormationModel $formationModel)
-    {
-        //
+        FormationModel::destroy($codeForm);
+        return redirect()->route('formations.index');
     }
 }
