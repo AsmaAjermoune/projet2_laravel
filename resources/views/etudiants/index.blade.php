@@ -1,17 +1,17 @@
 @extends('layout')
 
 @section('content')
-<div class="container mt-4">
+<div>
 
-    <h2 class="mb-4">Liste des Étudiants</h2>
+    <h2>Liste des Étudiants</h2>
 
-    <a href="{{ route('etudiants.create') }}" class="btn btn-primary mb-3">
+    <a href="{{ route('etudiants.create') }}">
         Ajouter Étudiant
     </a>
 
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover align-middle">
-            <thead class="table-light">
+    <div>
+        <table>
+            <thead>
                 <tr>
                     <th>CIN</th>
                     <th>Nom</th>
@@ -32,8 +32,7 @@
                         <td>{{ $e->villeEtu }}</td>
                         <td>{{ $e->formation->titreForm ?? '' }}</td>
                         <td>
-                            <a href="{{ route('etudiants.edit', $e->NumCINETU) }}"
-                               class="btn btn-sm btn-warning me-1">
+                            <a href="{{ route('etudiants.edit', $e->NumCINETU) }}">
                                  Edit
                             </a>
 
@@ -42,7 +41,7 @@
                                   style="display:inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger"
+                                <button type="submit"
                                         onclick="return confirm('Êtes-vous sûr de supprimer cet étudiant ?')">
                                      Supprimer
                                 </button>

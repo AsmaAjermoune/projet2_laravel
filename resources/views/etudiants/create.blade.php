@@ -1,58 +1,58 @@
 @extends('layout')
 
 @section('content')
-<div class="container mt-4">
+<div>
 
-    <h2 class="mb-4">Ajouter étudiant</h2>
+    <h2>Ajouter étudiant</h2>
 
-    <form method="POST" action="{{ route('etudiants.store') }}" class="card p-4 shadow-sm">
+    <form method="POST" action="{{ route('etudiants.store') }}">
         @csrf
 
-        <div class="mb-3">
-            <label class="form-label">CIN</label>
-            <input type="text" name="NumCINETU" class="form-control" placeholder="CIN">
+        <div>
+            <label>CIN</label>
+            <input type="text" name="NumCINETU" placeholder="CIN">
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Nom</label>
-            <input type="text" name="nomEtu" class="form-control" placeholder="Nom">
+        <div>
+            <label>Nom</label>
+            <input type="text" name="nomEtu" placeholder="Nom">
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Prénom</label>
-            <input type="text" name="prenomEtu" class="form-control" placeholder="Prénom">
+        <div>
+            <label>Prénom</label>
+            <input type="text" name="prenomEtu" placeholder="Prénom">
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Adresse</label>
-            <input type="text" name="adresseEtu" class="form-control" placeholder="Adresse">
+        <div>
+            <label>Adresse</label>
+            <input type="text" name="adresseEtu" placeholder="Adresse">
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Ville</label>
-            <input type="text" name="villeEtu" class="form-control" placeholder="Ville">
+        <div>
+            <label>Ville</label>
+            <input type="text" name="villeEtu" placeholder="Ville">
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Niveau</label>
-            <input type="text" name="niveauEtu" class="form-control" placeholder="Niveau">
+        <div>
+            <label>Niveau</label>
+            <input type="text" name="niveauEtu" placeholder="Niveau">
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Formation</label>
-            <select name="codeForm" class="form-select">
+        <div>
+            <label>Formation</label>
+            <select name="codeForm">
                 @foreach($formations as $f)
                     <option value="{{ $f->codeForm }}">{{ $f->titreForm }}</option>
                 @endforeach
             </select>
         </div>
 
-        <div class="d-flex gap-2">
-            <button type="submit" class="btn btn-primary">
+        <div>
+            <button type="submit">
                 Enregistrer
             </button>
 
-            <a href="{{ route('etudiants.index') }}" class="btn btn-secondary">
+            <a href="{{ route('etudiants.index') }}">
                 Annuler
             </a>
         </div>
