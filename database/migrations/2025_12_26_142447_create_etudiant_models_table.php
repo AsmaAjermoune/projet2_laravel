@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('etudiant_models', function (Blueprint $table) {
             $table->String('NumCINETU')->primary();
             $table->integer('codeForm');
-            $table->foreign('codeForm')->references('codeForm')->on('formation_models');
+            $table->foreign('codeForm')->references('codeForm')->on('formation_models')->onDelete('cascade');
             $table->String('nomEtu');
             $table->String('prenomEtu');
             $table->String('adresseEtu');

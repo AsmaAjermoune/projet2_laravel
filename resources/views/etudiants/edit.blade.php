@@ -1,25 +1,75 @@
 @extends('layout')
 
 @section('content')
-<h2>Modifier étudiant</h2>
+<div class="container mt-4">
 
-<form method="POST" action="{{ route('etudiants.update', $etudiant->NumCIN) }}">
-@csrf @method('PUT')
+    <h2 class="mb-4">Modifier étudiant</h2>
 
-<input name="nomEtu" value="{{ $etudiant->nomEtu }}"><br>
-<input name="prenomEtu" value="{{ $etudiant->prenomEtu }}"><br>
-<input name="adresseEtu" value="{{ $etudiant->adresseEtu }}"><br>
-<input name="villeEtu" value="{{ $etudiant->villeEtu }}"><br>
-<input name="niveauEtu" value="{{ $etudiant->niveauEtu }}"><br>
+    <form method="POST"
+          action="{{ route('etudiants.update', $etudiant->NumCINETU) }}"
+          class="card p-4 shadow-sm">
 
-<select name="codeForm">
-@foreach($formations as $f)
-<option value="{{ $f->codeForm }}" {{ $etudiant->codeForm==$f->codeForm?'selected':'' }}>
-{{ $f->titreForm }}
-</option>
-@endforeach
-</select><br>
+        @csrf
+        @method('PUT')
 
-<button>Modifier</button>
-</form>
+        <div class="mb-3">
+            <label class="form-label">Nom</label>
+            <input type="text" name="nomEtu"
+                   class="form-control"
+                   value="{{ $etudiant->nomEtu }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Prénom</label>
+            <input type="text" name="prenomEtu"
+                   class="form-control"
+                   value="{{ $etudiant->prenomEtu }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Adresse</label>
+            <input type="text" name="adresseEtu"
+                   class="form-control"
+                   value="{{ $etudiant->adresseEtu }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Ville</label>
+            <input type="text" name="villeEtu"
+                   class="form-control"
+                   value="{{ $etudiant->villeEtu }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Niveau</label>
+            <input type="text" name="niveauEtu"
+                   class="form-control"
+                   value="{{ $etudiant->niveauEtu }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Formation</label>
+            <select name="codeForm" class="form-select">
+                @foreach($formations as $f)
+                    <option value="{{ $f->codeForm }}"
+                        {{ $etudiant->codeForm == $f->codeForm ? 'selected' : '' }}>
+                        {{ $f->titreForm }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-warning">
+                Modifier
+            </button>
+
+            <a href="{{ route('etudiants.index') }}" class="btn btn-secondary">
+                Annuler
+            </a>
+        </div>
+
+    </form>
+
+</div>
 @endsection

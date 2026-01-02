@@ -4,14 +4,14 @@
 <h2>Modifier spécialité</h2>
 
 <form method="POST"
-      action="{{ route('specialites.update', $specialite->codeSpe) }}">
+      action="{{ route('specialites.update', $specialite->codeSpec) }}">
 @csrf
 @method('PUT')
+Code: <input name="codeSpec" value="{{ $specialite->codeSpec }}"><br>
+Nom: <input name="nomSpec" value="{{ $specialite->nomSpec }}"><br>
+Description: <input name="descSpec" value="{{ $specialite->descSpec }}"><br>
 
-<input name="nomSpe" value="{{ $specialite->nomSpe }}"><br>
-<input name="descSpe" value="{{ $specialite->descSpe }}"><br>
-
-<select name="codeForm">
+Formation : <select name="codeForm">
 @foreach($formations as $f)
 <option value="{{ $f->codeForm }}"
     {{ $specialite->codeForm == $f->codeForm ? 'selected' : '' }}>

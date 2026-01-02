@@ -5,13 +5,12 @@
 
 <form method="POST" action="{{ route('formations.store') }}">
 @csrf
+Code : <input name="codeForm" placeholder="Code"><br>
+Titre : <input name="titreForm" placeholder="Titre"><br>
+Durée : <input name="dureeForm" placeholder="Durée"><br>
+Prix : <input name="prixForm" placeholder="Prix"><br>
 
-<input name="codeForm" placeholder="Code"><br>
-<input name="titreForm" placeholder="Titre"><br>
-<input name="dureeForm" placeholder="Durée"><br>
-<input name="prixForm" placeholder="Prix"><br>
-
-<select name="codeSess">
+Session : <select name="codeSess">
 @foreach($sessions as $s)
 <option value="{{ $s->codeSess }}">{{ $s->nomSess }}</option>
 @endforeach

@@ -1,20 +1,26 @@
 @extends('layout')
 
 @section('content')
-<h2>Formations</h2>
+<h2>Listes des Formations</h2>
 
-<a href="{{ route('formations.create') }}">Ajouter</a>
+<a href="{{ route('formations.create') }}">Ajouter Formation</a>
 
 <table border="1">
 <tr>
+    <th>Code</th>
     <th>Titre</th>
+    <th>Durée</th>
+    <th>Prix</th>
     <th>Session</th>
     <th>Actions</th>
 </tr>
 
 @foreach($formations as $f)
 <tr>
+    <td>{{ $f->codeForm }}</td>
     <td>{{ $f->titreForm }}</td>
+    <td>{{ $f->dureeForm }}</td>
+    <td>{{ $f->prixForm }}</td>
     <td>{{ $f->session->nomSess ?? '' }}</td>
     <td>
         <a href="{{ route('formations.edit', $f->codeForm) }}">edit</a>

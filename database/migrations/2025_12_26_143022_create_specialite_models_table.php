@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('specialite_models', function (Blueprint $table) {
             $table->integer('codeSpec')->primary();
             $table->integer('codeForm');
-            $table->foreign('codeForm')->references('codeForm')->on('formation_models');
+            $table->foreign('codeForm')->references('codeForm')->on('formation_models')->onDelete('cascade');
             $table->String('nomSpec');
             $table->String('descSpec');
             $table->timestamps();

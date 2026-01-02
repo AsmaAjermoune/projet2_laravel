@@ -13,6 +13,6 @@ class SpecialiteModel extends Model{
 
  
     public function formation(){
-        return $this->belongsTo(Formation::class, 'codeForm', 'codeForm');
+        return $this->belongsTo(FormationModel::class, 'codeForm', 'codeForm');
     }
 }
