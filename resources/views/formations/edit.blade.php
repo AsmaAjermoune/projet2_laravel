@@ -1,24 +1,55 @@
 @extends('layout')
 
 @section('content')
-<h2>Modifier formation</h2>
+<div class="container mt-4">
 
-<form method="POST" action="{{ route('formations.update', $formation->codeForm) }}">
-@csrf @method('PUT')
+    <h2 class="mb-4">Modifier Formation</h2>
 
-Code : <input name="codeForm" value="{{ $formation->codeForm }}"><br>
-Titre : <input name="titreForm" value="{{ $formation->titreForm }}"><br>
-Durée : <input name="dureeForm" value="{{ $formation->dureeForm }}"><br>
-Prix : <input name="prixForm" value="{{ $formation->prixForm }}"><br>
+    <form method="POST" action="{{ route('formations.update', $formation->codeForm) }}" class="card p-4 shadow-sm">
+        @csrf
+        @method('PUT')
 
-Session : <select name="codeSess">
-@foreach($sessions as $s)
-<option value="{{ $s->codeSess }}" {{ $formation->codeSess==$s->codeSess?'selected':'' }}>
-{{ $s->nomSess }}
-</option>
-@endforeach
-</select><br>
+        <div class="mb-3">
+            <label class="form-label">Code</label>
+            <input type="text" name="codeForm" class="form-control" value="{{ $formation->codeForm }}" disabled>
+        </div>
 
-<button>Modifier</button>
-</form>
+        <div class="mb-3">
+            <label class="form-label">Titre</label>
+            <input type="text" name="titreForm" class="form-control" value="{{ $formation->titreForm }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Durée</label>
+            <input type="text" name="dureeForm" class="form-control" value="{{ $formation->dureeForm }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Prix</label>
+            <input type="text" name="prixForm" class="form-control" value="{{ $formation->prixForm }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Session</label>
+            <select name="codeSess" class="form-select">
+                @foreach($sessions as $s)
+                    <option value="{{ $s->codeSess }}" {{ $formation->codeSess == $s->codeSess ? 'selected' : '' }}>
+                        {{ $s->nomSess }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-warning">
+                Modifier
+            </button>
+            <a href="{{ route('formations.index') }}" class="btn btn-secondary">
+                Annuler
+            </a>
+        </div>
+
+    </form>
+
+</div>
 @endsection

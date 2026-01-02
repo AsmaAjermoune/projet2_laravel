@@ -1,16 +1,44 @@
 @extends('layout')
 
 @section('content')
-<h2>Modifier session</h2>
+<div class="container mt-4">
 
-<form method="POST" action="{{ route('sessions.update', $session->codeSess) }}">
-@csrf @method('PUT')
+    <h2 class="mb-4">Modifier Session</h2>
 
-Code : <input name="codeSess" value="{{ $session->codeSess }}"><br>
-Nom : <input name="nomSess" value="{{ $session->nomSess }}"><br>
-Date Début : <input type="date" name="dateDebutSess" value="{{ $session->dateDebutSess }}"><br>
-Date Fin : <input type="date" name="dateFinSess" value="{{ $session->dateFinSess }}"><br>
+    <form method="POST" action="{{ route('sessions.update', $session->codeSess) }}" class="card p-4 shadow-sm">
+        @csrf
+        @method('PUT')
 
-<button>Modifier</button>
-</form>
+        <div class="mb-3">
+            <label class="form-label">Code</label>
+            <input type="text" name="codeSess" class="form-control" value="{{ $session->codeSess }}" disabled>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Nom</label>
+            <input type="text" name="nomSess" class="form-control" value="{{ $session->nomSess }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Date Début</label>
+            <input type="date" name="dateDebutSess" class="form-control" value="{{ $session->dateDebutSess }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Date Fin</label>
+            <input type="date" name="dateFinSess" class="form-control" value="{{ $session->dateFinSess }}">
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-warning">
+                Modifier
+            </button>
+            <a href="{{ route('sessions.index') }}" class="btn btn-secondary">
+                Annuler
+            </a>
+        </div>
+
+    </form>
+
+</div>
 @endsection

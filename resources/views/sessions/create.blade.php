@@ -1,16 +1,43 @@
 @extends('layout')
 
 @section('content')
-<h2>Ajouter session</h2>
+<div class="container mt-4">
 
-<form method="POST" action="{{ route('sessions.store') }}">
-@csrf
+    <h2 class="mb-4">Ajouter Session</h2>
 
-Code : <input name="codeSess" placeholder="Code"><br>
-Nom : <input name="nomSess" placeholder="Nom"><br>
-Date Début : <input type="date" name="dateDebutSess"><br>
-Date Fin : <input type="date" name="dateFinSess"><br>
+    <form method="POST" action="{{ route('sessions.store') }}" class="card p-4 shadow-sm">
+        @csrf
 
-<button>Enregistrer</button>
-</form>
+        <div class="mb-3">
+            <label class="form-label">Code</label>
+            <input type="text" name="codeSess" class="form-control" placeholder="Code">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Nom</label>
+            <input type="text" name="nomSess" class="form-control" placeholder="Nom">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Date Début</label>
+            <input type="date" name="dateDebutSess" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Date Fin</label>
+            <input type="date" name="dateFinSess" class="form-control">
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">
+                Enregistrer
+            </button>
+            <a href="{{ route('sessions.index') }}" class="btn btn-secondary">
+                Annuler
+            </a>
+        </div>
+
+    </form>
+
+</div>
 @endsection
